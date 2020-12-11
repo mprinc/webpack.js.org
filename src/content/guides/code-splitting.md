@@ -42,7 +42,7 @@ related:
 
 T> This guide extends the examples provided in [Getting Started](/guides/getting-started) and [Output Management](/guides/output-management). Please make sure you are at least familiar with the examples provided in them.
 
-Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
+<span class='definition'>Code splitting</span> is one of the most compelling features of webpack. This feature allows you to <span class='important'>split your code into various bundles which can then be loaded on demand or in parallel</span>. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
 
 There are three general approaches to code splitting available:
 
@@ -53,7 +53,7 @@ There are three general approaches to code splitting available:
 
 ## Entry Points
 
-This is by far the easiest and most intuitive way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+This is by far <span class='important'>the easiest and most intuitive</span> way to split code. However, it is <span class='important'>more manual and has some pitfalls</span> we will go over. Let's take a look at how we might split another module from the main bundle:
 
 __project__
 
@@ -110,8 +110,8 @@ Entrypoint another = another.bundle.js
 
 As mentioned there are some pitfalls to this approach:
 
-- If there are any duplicated modules between entry chunks they will be included in both bundles.
-- It isn't as flexible and can't be used to dynamically split code with the core application logic.
+- If there are <span class='definition'>any duplicated modules</span> between entry chunks <span class='important'>they will be included in both bundles</span>.
+- It <span class='important'>isn't as flexible</span> and can't be used to dynamically split code with the core application logic.
 
 The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/).
 

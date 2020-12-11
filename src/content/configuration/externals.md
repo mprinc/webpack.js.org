@@ -17,7 +17,7 @@ contributors:
   - chenxsan
 ---
 
-The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
+The `externals` configuration option provides a way of <span class='definition'>excluding dependencies from the output bundles</span>. Instead, <span class='important'>the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment</span>. This feature is typically <span class='important'>most useful to __library developers__</span>, however there are a variety of applications for it.
 
 
 ## `externals`
@@ -26,7 +26,7 @@ The `externals` configuration option provides a way of excluding dependencies fr
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
-For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
+For example, <span class='definition'>to include [jQuery](https://jquery.com/) from a CDN instead of bundling it</span>:
 
 __index.html__
 
@@ -69,9 +69,9 @@ The following syntaxes are accepted...
 
 ### string
 
-See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
+See the example above. The <span class='definition'>property name `jquery`</span> indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the <span class='definition'>value `jQuery`</span> will be used to retrieve a <span class='definition'>global `jQuery` variable</span>. In other words, when a string is provided it will be <span class='definition'>treated as `root`</span> (defined above and below).
 
-On the other hand, if you want to externalise a library that is available as a CommonJS module, you can provide the external library type together with the library name.
+On the other hand, <span class='important'>if you want to externalise a library that is available as a CommonJS module, you can provide the <span class='definition'>external library type</span> together with the library name</span>.
 
 For example, if you want to exclude `fs-extra` from the output bundle and import it during the runtime instead, you can specify it as follows:
 
@@ -84,13 +84,13 @@ module.exports = {
 };
 ```
 
-This leaves any dependent modules unchanged, i.e. the code shown below:
+<span class='important'>This leaves any dependent modules unchanged</span>, i.e. the code shown below:
 
 ```javascript
 import fs from 'fs-extra';
 ```
 
-will compile to something like:
+will compile to <span class='definition'>something like</span>:
 
 ```javascript
 const fs = require('fs-extra');
@@ -107,11 +107,11 @@ module.exports = {
 };
 ```
 
-`subtract: ['./math', 'subtract']` allows you select part of a commonjs module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable. This example would translate to `require('./math').subtract;`
+`subtract: ['./math', 'subtract']` allows you <span class='definition'>select part of a commonjs module</span>, where `./math` is the module and your bundle only requires the subset under the `subtract` variable. This example would translate to `require('./math').subtract;`
 
 ### object
 
-W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget). It's not allowed for other library targets.
+W> An object with `{ root, amd, commonjs, ... }` is <span class='important'>only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget)</span>. It's not allowed for other library targets.
 
 ```javascript
 module.exports = {
@@ -140,14 +140,14 @@ module.exports = {
 };
 ```
 
-This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
+This syntax is used to <span class='important'>describe all the possible ways that an external library can be made available</span>. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
 
 ### function
 
 `function (context, request, callback)`
 
-It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides options to whitelist packages.
+It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for <span class='important'>example, excludes all modules from the `node_modules` directory and provides options to whitelist packages</span>.
 
 The function receives three arguments:
 
@@ -161,7 +161,7 @@ The callback function takes three arguments:
 - `result` (`string` `[string]` `object`): Describes the external module. Can accept a string in the format `${type} ${path}`, or one of the other standard external formats ([`string`](#string), [`[string]`](#string-1), or [`object`](#object))
 - `type` (`string`): Optional parameter that indicates the module type (if it has not already been indicated in the `result` parameter).
 
-As an example, to externalize all imports where the import path matches a regular expression you could do the following:
+As an example, to externalize all imports <span class='important'>where the import path matches a regular expression</span> you could do the following:
 
 __webpack.config.js__
 
@@ -243,7 +243,7 @@ module.exports = {
 
 ### RegExp
 
-Every dependency that matches the given regular expression will be excluded from the output bundles.
+<span class='important'>Every dependency that matches the given regular expression</span> will be excluded from the output bundles.
 
 __webpack.config.js__
 
@@ -258,7 +258,7 @@ In this case, any dependency named `jQuery`, capitalized or not, or `$` would be
 
 ### Combining syntaxes
 
-Sometimes you may want to use a combination of the above syntaxes. This can be done in the following manner:
+Sometimes you may want to use a <span class='definition'>combination of the above syntaxes</span>. This can be done in the following manner:
 
 __webpack.config.js__
 
@@ -291,7 +291,7 @@ module.exports = {
 };
 ```
 
-W> [Default type](/configuration/externals/#externalstype) will be used if you specify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
+W> <span class='definition'>[Default type](/configuration/externals/#externalstype)</span> will be used if you specify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
@@ -401,6 +401,6 @@ console.log(head([1, 2, 3])); // logs 1 here
 console.log(window._.head(['a', 'b'])); // logs a here
 ```
 
-T> When loading code with HTML `<script>` tags, the webpack runtime will try to find an existing `<script>` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `'[output.uniqueName]:chunk-[chunkId]'` while external script has value of `'[output.uniqueName]:[global]'`. 
+T> When loading code with HTML `<script>` tags, the webpack runtime will try to find an existing `<script>` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `'[output.uniqueName]:chunk-[chunkId]'` while external script has value of `'[output.uniqueName]:[global]'`.
 
 T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` will also have effect on the external scripts loaded this way.

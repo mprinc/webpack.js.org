@@ -52,13 +52,13 @@ __webpack.config.js__
 
 ## Using source maps
 
-When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
+<span class='important'>When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location</span>. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, <span class='important'>the stack trace will simply point to `bundle.js`</span>. This isn't always helpful as you probably want to know exactly which source file the error came from.
 
-In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which map your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
+In order to make it easier to track down errors and warnings, <span class='definition'>JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps)</span>, <span class='important'>which map your compiled code back to your original source code</span>. If an error originates from `b.js`, the source map will tell you exactly that.
 
 There are a lot of [different options](/configuration/devtool) available when it comes to source maps. Be sure to check them out so you can configure them to your needs.
 
-For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
+For this guide, <span class='important'>let's use the `inline-source-map` option, which is good for illustrative purposes</span> (though <span class='important'>not for production</span>):
 
 __webpack.config.js__
 
@@ -116,7 +116,7 @@ Now open the resulting `index.html` file in your browser. Click the button and l
     at HTMLButtonElement.printMe (print.js:2)
  ```
 
-We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.
+We can see that the error also contains a <span class='important'>reference to the file</span> (`print.js`) and <span class='important'>line number</span> (2) where the error occurred. This is great because <span class='important'>now we know exactly where to look in order to fix the issue</span>.
 
 
 ## Choosing a Development Tool
@@ -136,7 +136,7 @@ In most cases, you probably would want to use `webpack-dev-server`, but let's ex
 
 ### Using Watch Mode
 
-You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, the code will be recompiled so you don't have to run the full build manually.
+You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, <span class='important'>the code will be recompiled so you don't have to run the full build manually</span>.
 
 Let's add an npm script that will start webpack's Watch Mode:
 
@@ -168,7 +168,7 @@ __package.json__
   }
 ```
 
-Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
+Tell `CleanWebpackPlugin` that <span class='important'>we don't want to remove the `index.html` file after the incremental build</span> triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
 
 __webpack.config.js__
 
@@ -199,7 +199,7 @@ __webpack.config.js__
 ```
 
 Now run `npm run watch` from the command line and see how webpack compiles your code.
-You can see that it doesn't exit the command line because the script is currently watching your files.
+You can see that <span class='important'>it doesn't exit the command line</span> because the script is currently watching your files.
 
 Now, while webpack is watching your files, let's remove the error we introduced earlier:
 
@@ -212,9 +212,9 @@ __src/print.js__
   }
 ```
 
-Now save your file and check the terminal window. You should see that webpack automatically recompiles the changed module!
+Now save your file and check the terminal window. You should see that <span class='important'>webpack automatically recompiles the changed module</span>!
 
-The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
+The only downside is that <span class='important'>you have to refresh your browser</span> in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
 
 
 ### Using webpack-dev-server
@@ -259,7 +259,7 @@ __webpack.config.js__
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
 
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
+W> webpack-dev-server <span class='important'>doesn't write any output files after compiling</span>. Instead, it <span class='definition'>keeps bundle files in memory</span> and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
 
@@ -295,7 +295,7 @@ __package.json__
   }
 ```
 
-Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
+Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, <span class='important'>the web server will automatically reload after the code has been compiled</span>. Give it a try!
 
 The `webpack-dev-server` comes with many configurable options. Head over to the [documentation](/configuration/dev-server) to learn more.
 
@@ -304,7 +304,7 @@ T> Now that your server is working, you might want to give [Hot Module Replaceme
 
 ### Using webpack-dev-middleware
 
-`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
+`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at <span class='definition'>an example that combines `webpack-dev-middleware` with an express server</span>.
 
 Let's install `express` and `webpack-dev-middleware` so we can get started:
 
@@ -345,7 +345,7 @@ __webpack.config.js__
   };
 ```
 
-The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our custom `express` server:
+The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our <span class='definition'>custom `express` server</span>:
 
 __project__
 

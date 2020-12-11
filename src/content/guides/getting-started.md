@@ -25,7 +25,7 @@ contributors:
   - anshumanv
 ---
 
-webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
+webpack is used to <span class='definition'>compile JavaScript modules</span>. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
 W> Since webpack v5.0.0-beta.1 the minimum Node.js version to run webpack is 10.13.0 (LTS)
 
@@ -111,9 +111,9 @@ __package.json__
   }
 ```
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
+In this example, there are <span class='definition'>implicit dependencies between the `<script>` tags</span>. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because <span class='important'>`index.js` never explicitly declared a need for `lodash`</span>; it just assumes that the global variable `_` exists.
 
-There are problems with managing JavaScript projects this way:
+There are <span class='definition'>problems with managing JavaScript projects this way</span>:
 
 - It is not immediately apparent that the script depends on an external library.
 - If a dependency is missing, or included in the wrong order, the application will not function properly.
@@ -123,7 +123,7 @@ Let's use webpack to manage these scripts instead.
 
 ## Creating a Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
+First we'll tweak our directory structure slightly, separating the <span class='definition'>"source" code (`/src`)</span> from our <span class='definition'>"distribution" code (`/dist`)</span>. The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
 
 __project__
 
@@ -137,7 +137,7 @@ __project__
     |- index.js
 ```
 
-To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
+To <span class='definition'>bundle the `lodash` dependency with `index.js`</span>, we'll need to install the library locally:
 
 ``` bash
 npm install --save lodash
@@ -165,7 +165,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
+Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other <span class='definition'>`<script>` tag to load the bundle</span>, instead of the raw `/src` file:
 
 __dist/index.html__
 
@@ -183,9 +183,9 @@ __dist/index.html__
   </html>
 ```
 
-In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
+In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a <span class='definition'>dependency graph</span>. It then uses the graph to generate an <span class='definition'>optimized bundle</span> where scripts will be executed in the correct order.
 
-With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+With that said, let's <span class='definition'>run</span> `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
 npx webpack
@@ -197,7 +197,7 @@ main.js  70.4 KiB       0  [emitted]  main
 ...
 
 WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+The <span class='definition'>'mode' option</span> has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
 You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
 ```
 
@@ -205,21 +205,21 @@ T> Your output may vary a bit, but if the build is successful then you are good 
 
 Open `index.html` from the `dist` directory in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
 
-W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
+W> If you are getting a <span class='definition'>syntax error</span> in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
 
 
 ## Modules
 
 The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). They are supported in most of the browsers at this moment, however there are some browsers that don't recognize the new syntax. But don't worry, webpack does support them out of the box.
 
-Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+Behind the scenes, webpack actually <span class='definition'>"transpiles" the code so that older browsers can also run it</span>. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's <span class='definition'>quite ingenious</span>! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
 
-Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
+Note that <span class='important'>webpack will not alter any code other than `import` and `export` statements</span>. If you are <span class='definition'>using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling)</span> such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
 
 
 ## Using a Configuration
 
-As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
+As of version 4, <span class='definition'>webpack doesn't require any configuration</span>, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
 
 __project__
 
@@ -269,7 +269,7 @@ A configuration file allows far more flexibility than simple CLI usage. We can s
 
 ## NPM Scripts
 
-Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
+Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little <span class='definition'>shortcut</span>. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
 
 __package.json__
 
